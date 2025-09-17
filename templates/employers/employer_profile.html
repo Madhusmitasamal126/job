@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Employer Profile | Job Portal{% endblock %}
+{% block content %}
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
+          <h3 class="mb-0"><i class="bi bi-building"></i> Employer Profile</h3>
+        </div>
+        <div class="card-body p-4">
+          <form method="POST" class="needs-validation" novalidate>
+            {% csrf_token %}
+            
+            <div class="row">
+              <!-- Company Name -->
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold"><i class="bi bi-building"></i> Company Name</label>
+                <input type="text" name="company_name" class="form-control" 
+                       value="{{ profile.company_name }}" placeholder="Enter company name" required>
+              </div>
+
+              <!-- Industry -->
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold"><i class="bi bi-briefcase"></i> Industry</label>
+                <input type="text" name="industry" class="form-control" 
+                       value="{{ profile.industry }}" placeholder="e.g. IT, Healthcare">
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- Location -->
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold"><i class="bi bi-geo-alt"></i> Location</label>
+                <input type="text" name="location" class="form-control" 
+                       value="{{ profile.location }}" placeholder="City, Country">
+              </div>
+
+              <!-- Website -->
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold"><i class="bi bi-globe"></i> Website</label>
+                <input type="url" name="website" class="form-control" 
+                       value="{{ profile.website }}" placeholder="https://example.com">
+              </div>
+            </div>
+
+            <!-- About Company -->
+            <div class="mb-3">
+              <label class="form-label fw-bold"><i class="bi bi-info-circle"></i> About Company</label>
+              <textarea name="about" rows="5" class="form-control" placeholder="Write about your company...">{{ profile.about }}</textarea>
+            </div>
+
+            <!-- Save Button -->
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow">
+                <i class="bi bi-save"></i> Save Changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

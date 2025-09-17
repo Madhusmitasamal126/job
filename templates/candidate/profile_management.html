@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Manage Profile | Job Portal{% endblock %}
+{% block content %}
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-lg border-0 rounded-4 p-4 profile-card">
+        <h3 class="mb-4 text-center text-primary"><i class="bi bi-person-circle me-2"></i>My Profile</h3>
+
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          <!-- Avatar Preview -->
+          <div class="text-center mb-4">
+            {% if profile.user.profile.avatar %}
+              <img src="{{ profile.user.profile.avatar.url }}" class="rounded-circle shadow-sm" alt="Avatar" width="100" height="100">
+            {% else %}
+              <i class="bi bi-person-circle text-secondary" style="font-size: 100px;"></i>
+            {% endif %}
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Full Name</label>
+            <input type="text" name="full_name" class="form-control" value="{{ profile.user.get_full_name }}" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Email</label>
+            <input type="email" name="email" class="form-control" value="{{ profile.user.email }}" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Phone</label>
+            <input type="text" name="phone" class="form-control" value="{{ profile.phone }}">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Skills</label>
+            <textarea name="skills" rows="4" class="form-control" placeholder="Add your skills separated by commas">{{ profile.skills }}</textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Upload Resume</label>
+            <input type="file" name="resume" class="form-control">
+            {% if profile.resume %}
+              <small class="text-success mt-1 d-block">Current resume: <a href="{{ profile.resume.url }}" target="_blank">{{ profile.resume.name|slice:"8:" }}</a></small>
+            {% endif %}
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 fw-bold">
+            <i class="bi bi-save2-fill me-2"></i> Save Profile
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .profile-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .profile-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.75rem 1.5rem rgba(0,0,0,0.15);
+  }
+
+  .profile-card h3 {
+    font-weight: 600;
+  }
+
+  .profile-card .form-label {
+    font-weight: 500;
+  }
+</style>
+
+{% endblock %}

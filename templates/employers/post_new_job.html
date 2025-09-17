@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Post New Job | Job Portal{% endblock %}
+{% block content %}
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-lg border-0 rounded-4">
+        <!-- Card Header -->
+        <div class="card-header bg-gradient text-white text-center rounded-top-4" 
+             style="background: linear-gradient(90deg, #198754, #28a745);">
+          <h3 class="mb-0"><i class="bi bi-briefcase-fill me-2"></i>Post a New Job</h3>
+        </div>
+
+        <!-- Card Body -->
+        <div class="card-body p-4">
+          <form method="POST">
+            {% csrf_token %}
+            
+            <!-- Job Title -->
+            <div class="mb-3">
+              <label class="form-label">Job Title</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-pencil-square"></i></span>
+                <input type="text" name="title" class="form-control" placeholder="e.g. Software Engineer" required>
+              </div>
+            </div>
+
+            <!-- Location -->
+            <div class="mb-3">
+              <label class="form-label">Location</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-geo-alt-fill"></i></span>
+                <input type="text" name="location" class="form-control" placeholder="e.g. New York, USA" required>
+              </div>
+            </div>
+
+            <!-- Salary -->
+            <div class="mb-3">
+              <label class="form-label">Salary</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-cash-stack"></i></span>
+                <input type="text" name="salary" class="form-control" placeholder="e.g. $60,000 - $80,000">
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+              <label class="form-label">Description</label>
+              <textarea name="description" rows="5" class="form-control" placeholder="Enter detailed job description..." required></textarea>
+            </div>
+
+            <!-- Submit -->
+            <div class="d-grid">
+              <button type="submit" class="btn btn-success btn-lg">
+                <i class="bi bi-check-circle-fill me-2"></i>Post Job
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Extra CSS -->
+<style>
+  .card-header {
+    border-bottom: none;
+  }
+  .btn-success:hover {
+    background-color: #157347 !important;
+    transform: scale(1.02);
+    transition: 0.2s;
+  }
+</style>
+
+{% endblock %}

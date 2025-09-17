@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Employer Dashboard | Job Portal{% endblock %}
+{% block content %}
+
+<div class="container py-5">
+  <!-- Dashboard Header -->
+  <div class="text-center mb-5">
+    <h2 class="fw-bold">Employer Dashboard</h2>
+    <p class="text-muted">Manage your company profile, jobs, and applicants in one place.</p>
+  </div>
+
+  <div class="row g-4">
+    <!-- Profile -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card h-100 text-center p-4 shadow-sm border-0 rounded-4 card-hover">
+        <div class="icon-circle bg-primary bg-opacity-10 text-primary mb-3 mx-auto">
+          <i class="bi bi-person-circle fs-1"></i>
+        </div>
+        <h5 class="fw-bold">My Profile</h5>
+        <p class="text-muted small">Update company information & contact details.</p>
+        <a href="{% url 'employer_profile' %}" class="btn btn-primary btn-sm rounded-pill mt-2">Edit Profile</a>
+      </div>
+    </div>
+
+    <!-- Post Job -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card h-100 text-center p-4 shadow-sm border-0 rounded-4 card-hover">
+        <div class="icon-circle bg-success bg-opacity-10 text-success mb-3 mx-auto">
+          <i class="bi bi-plus-circle fs-1"></i>
+        </div>
+        <h5 class="fw-bold">Post a Job</h5>
+        <p class="text-muted small">Publish new job listings for candidates.</p>
+        <a href="{% url 'post_new_job' %}" class="btn btn-success btn-sm rounded-pill mt-2">Post Job</a>
+      </div>
+    </div>
+
+    <!-- Manage Jobs -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card h-100 text-center p-4 shadow-sm border-0 rounded-4 card-hover">
+        <div class="icon-circle bg-warning bg-opacity-10 text-warning mb-3 mx-auto">
+          <i class="bi bi-briefcase fs-1"></i>
+        </div>
+        <h5 class="fw-bold">Manage Jobs</h5>
+        <p class="text-muted small">View, edit or delete your job postings.</p>
+        <a href="{% url 'manage_job' %}" class="btn btn-warning text-white btn-sm rounded-pill mt-2">Manage Jobs</a>
+      </div>
+    </div>
+
+    <!-- View Applicants -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card h-100 text-center p-4 shadow-sm border-0 rounded-4 card-hover">
+        <div class="icon-circle bg-info bg-opacity-10 text-info mb-3 mx-auto">
+          <i class="bi bi-people fs-1"></i>
+        </div>
+        <h5 class="fw-bold">View Applicants</h5>
+        <p class="text-muted small">Check candidates who applied to your jobs.</p>
+        <a href="{% url 'view_applicants' %}" class="btn btn-info text-white btn-sm rounded-pill mt-2">View Applicants</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Custom CSS -->
+<style>
+  .card-hover {
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  }
+  .icon-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+
+{% endblock %}

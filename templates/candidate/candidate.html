@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Candidate Dashboard | Job Portal{% endblock %}
+{% block content %}
+
+<div class="container py-5">
+  <div class="text-center mb-5">
+    <h2 class="fw-bold">Welcome, {{ request.user.first_name|default:request.user.username }}!</h2>
+    <p class="text-muted">Manage your profile, explore jobs, and track your applications.</p>
+  </div>
+
+  <div class="row g-4">
+
+    <div class="col-md-4">
+      <div class="card text-center p-4 shadow-sm h-100 dashboard-card">
+        <div class="icon-wrapper mb-3">
+          <i class="bi bi-person-badge fs-1"></i>
+        </div>
+        <h5 class="fw-bold">My Profile</h5>
+        <p class="text-muted">Update personal info & resume.</p>
+        <a href="{% url 'profile_management' %}" class="btn btn-primary btn-sm">Manage Profile</a>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card text-center p-4 shadow-sm h-100 dashboard-card">
+        <div class="icon-wrapper mb-3">
+          <i class="bi bi-search fs-1"></i>
+        </div>
+        <h5 class="fw-bold">Browse Jobs</h5>
+        <p class="text-muted">Find jobs that match your skills.</p>
+        <a href="{% url 'browse_jobs' %}" class="btn btn-success btn-sm">Search Jobs</a>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card text-center p-4 shadow-sm h-100 dashboard-card">
+        <div class="icon-wrapper mb-3">
+          <i class="bi bi-briefcase fs-1"></i>
+        </div>
+        <h5 class="fw-bold">Applied Jobs</h5>
+        <p class="text-muted">Track your job applications.</p>
+        <a href="{% url 'applied_jobs' %}" class="btn btn-warning text-white btn-sm">View Applications</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .dashboard-card {
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.75rem 1.5rem rgba(0,0,0,0.15);
+  }
+
+  .dashboard-card .icon-wrapper i {
+    padding: 20px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #4e73df, #1cc88a);
+    color: white;
+  }
+
+  .dashboard-card h5 {
+    margin-top: 15px;
+  }
+
+  .dashboard-card p {
+    font-size: 0.9rem;
+  }
+</style>
+
+{% endblock %}

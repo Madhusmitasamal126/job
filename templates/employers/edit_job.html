@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Edit Job | Job Portal{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-lg border-0 rounded-4 p-4">
+        <h3 class="mb-4 text-center">Edit Job: {{ job.title }}</h3>
+        <form method="POST">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-warning w-100">Update Job</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

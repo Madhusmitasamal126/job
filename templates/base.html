@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Job Portal{% endblock %}</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home' %}">JobPortal</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+
+          <!-- General Links -->
+          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'job_list' %}">Jobs</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+
+          <!-- Candidate Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="candidateDropdown" role="button" data-bs-toggle="dropdown">
+              Candidate
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="{% url 'candidate_dashboard' %}"><i class="bi bi-person"></i> Dashboard</a></li>
+              <li><a class="dropdown-item" href="{% url 'browse_jobs' %}"><i class="bi bi-search"></i> Browse Jobs</a></li>
+              <li><a class="dropdown-item" href="{% url 'applied_jobs' %}"><i class="bi bi-check2-circle"></i> Applied Jobs</a></li>
+              <li><a class="dropdown-item" href="{% url 'profile_management' %}"><i class="bi bi-person-lines-fill"></i> Profile Management</a></li>
+            </ul>
+          </li>
+
+          <!-- Employer Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="employerDropdown" role="button" data-bs-toggle="dropdown">
+              Employer
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="{% url 'employer' %}"><i class="bi bi-person-badge"></i> Employer Dashboard</a></li>
+              <li><a class="dropdown-item" href="{% url 'employer_profile' %}"><i class="bi bi-person-circle"></i> Employer Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'manage_job' %}"><i class="bi bi-briefcase"></i> Manage Jobs</a></li>
+              <li><a class="dropdown-item" href="{% url 'post_new_job' %}"><i class="bi bi-plus-circle"></i> Post New Job</a></li>
+              <li><a class="dropdown-item" href="{% url 'view_applicants' %}"><i class="bi bi-people"></i> View Applicants</a></li>
+            </ul>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-4 mt-5">
+    © {{ year }} JobPortal. All Rights Reserved.
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Custom JS -->
+  <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
