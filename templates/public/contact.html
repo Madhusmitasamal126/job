@@ -2,25 +2,104 @@
 {% block title %}Contact | Job Portal{% endblock %}
 
 {% block content %}
-<section class="py-5">
+<section class="py-5 position-relative" style="background: linear-gradient(120deg, #f8f9fa, #e9ecef);">
   <div class="container">
-    <h2 class="text-center mb-4">Contact Us</h2>
-    <form method="post" class="col-md-8 mx-auto shadow p-4 bg-light rounded">
-      {% csrf_token %}
-      <div class="mb-3">
-        <label for="name" class="form-label">Your Name</label>
-        <input type="text" name="name" id="name" class="form-control" required>
+    
+    <!-- Section Title -->
+    <div class="text-center mb-5">
+      <h2 class="fw-bold display-6">Get in Touch</h2>
+      <p class="text-muted">We’d love to hear from you. Reach out for support, queries, or feedback!</p>
+      <div class="mx-auto" style="width:80px; height:4px; background:#0d6efd; border-radius:2px;"></div>
+    </div>
+    
+    <div class="row g-4">
+      
+      <!-- Contact Form -->
+      <div class="col-lg-7">
+        <form method="post" class="shadow p-4 bg-white rounded border-start border-4 border-primary">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="name" class="form-label">Your Name</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-person"></i></span>
+              <input type="text" name="name" id="name" class="form-control" placeholder="Enter your name" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Your Email</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+              <input type="email" name="email" id="email" class="form-control" placeholder="example@email.com" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea name="message" id="message" rows="4" class="form-control" placeholder="Write your message..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary w-100 shadow-sm">
+            <i class="bi bi-send-fill"></i> Send Message
+          </button>
+        </form>
       </div>
-      <div class="mb-3">
-        <label for="email" class="form-label">Your Email</label>
-        <input type="email" name="email" id="email" class="form-control" required>
+      
+      <!-- Contact Info + Social Links -->
+      <div class="col-lg-5">
+        <div class="p-4 bg-white shadow rounded h-100">
+          <h5 class="fw-bold mb-3">Contact Information</h5>
+          <p><i class="bi bi-geo-alt-fill text-danger"></i> 123 Job Street, City, Country</p>
+          <p><i class="bi bi-telephone-fill text-success"></i> +91 98765 43210</p>
+          <p><i class="bi bi-envelope-fill text-primary"></i> support@jobportal.com</p>
+          
+          <!-- Social Links -->
+          <div class="mt-4">
+            <h6 class="fw-bold">Follow Us</h6>
+            <a href="#" class="me-3 text-primary fs-4"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="me-3 text-info fs-4"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="me-3 text-danger fs-4"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="me-3 text-dark fs-4"><i class="bi bi-linkedin"></i></a>
+          </div>
+          
+          <hr>
+          <h6 class="fw-bold">Find Us on Map</h6>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18..." 
+                  width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="message" class="form-label">Message</label>
-        <textarea name="message" id="message" rows="4" class="form-control" required></textarea>
+    </div>
+    
+    <!-- Extra Section: FAQ -->
+    <div class="row mt-5">
+      <div class="col-lg-8 mx-auto">
+        <h4 class="fw-bold text-center mb-3">Frequently Asked Questions</h4>
+        <div class="accordion" id="faqAccordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                How do I apply for jobs?
+              </button>
+            </h2>
+            <div id="faq1" class="accordion-collapse collapse show">
+              <div class="accordion-body">
+                Register as a candidate, complete your profile, and start applying directly from job listings.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                How can employers post jobs?
+              </button>
+            </h2>
+            <div id="faq2" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                Employers can sign up, create a company profile, and post jobs from their dashboard.
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <button type="submit" class="btn btn-primary">Send Message</button>
-    </form>
+    </div>
+    
   </div>
 </section>
 {% endblock %}

@@ -1,14 +1,40 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .models import Job
+from .models import Job, Category, Company, Testimonial
+
 from datetime import datetime
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
+from django.shortcuts import render
+from .models import Job
 
 def home(request):
-    jobs = Job.objects.all()[:6]
-    return render(request, "public/index.html", {"jobs": jobs, "year": datetime.now().year})
+    jobs = Job.objects.all()
+    query = request.GET.get('q')
+    location = request.GET.get('location')
+
+    if query:
+        jobs = jobs.filter(title__icontains=query)  # Search in job title
+    if location:
+        jobs = jobs.filter(location__icontains=location)  # Search in location
+
+    categories = Category.objects.all()  # If you have categories
+    companies = Company.objects.all()  # For carousel
+    testimonials = Testimonial.objects.all()
+    job_types = ['Full-time', 'Part-time', 'Internship']  # or fetch dynamically
+    locations = Job.objects.values_list('location', flat=True).distinct()
+
+    context = {
+        'jobs': jobs,
+        'categories': categories,
+        'companies': companies,
+        'testimonials': testimonials,
+        'job_types': job_types,
+        'locations': locations,
+    }
+    return render(request, 'public/index.html', context)
+
 
 def about(request):
     return render(request, "public/about.html", {"year": datetime.now().year})

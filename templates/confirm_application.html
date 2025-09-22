@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Confirm Application{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-lg p-4 border-0 rounded-4">
+        
+        <!-- Confirmation Icon -->
+        <div class="text-center mb-4">
+          <i class="bi bi-question-circle-fill text-warning display-3"></i>
+          <h3 class="fw-bold mt-3">Confirm Your Application</h3>
+        </div>
+
+        <!-- Job Details -->
+        <div class="bg-light p-3 rounded mb-4">
+          <h5 class="mb-1 text-primary">{{ job.title }}</h5>
+          <p class="mb-1"><i class="bi bi-building text-secondary"></i> {{ job.employer.company_name }}</p>
+          {% if job.location %}
+          <p class="mb-0"><i class="bi bi-geo-alt text-danger"></i> {{ job.location }}</p>
+          {% endif %}
+        </div>
+
+        <p class="text-center text-muted">
+          Are you sure you want to apply for this job? Once submitted, your application will be visible to the employer.
+        </p>
+
+        <!-- Form Buttons -->
+        <form method="post" enctype="multipart/form-data" action="{% url 'apply_job' job.id %}" class="text-center">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-success btn-lg px-4 me-2 shadow-sm">
+            <i class="bi bi-check-circle-fill"></i> Yes, Apply
+          </button>
+          <a href="{% url 'job_detail' job.id %}" class="btn btn-outline-secondary btn-lg px-4">
+            <i class="bi bi-x-circle"></i> Cancel
+          </a>
+        </form>
+
+        <!-- Extra Note -->
+        <div class="alert alert-info mt-4 mb-0 text-center">
+          <i class="bi bi-info-circle"></i> You can track this application from your <strong>Applied Jobs</strong> section.
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -3,58 +3,91 @@
 {% block content %}
 
 <div class="container py-5">
-  <!-- Dashboard Header -->
+  <!-- Dashboard Banner -->
   <div class="text-center mb-5">
-    <h2 class="fw-bold">Employer Dashboard</h2>
-    <p class="text-muted">Manage your company profile, jobs, and applicants in one place.</p>
+    <h2 class="fw-bold">Welcome, {{ user.username }}!</h2>
+    <p class="text-muted fs-6">Here's an overview of your company's activity.</p>
   </div>
 
+  <!-- Quick Stats -->
+  <div class="row g-4 mb-5">
+    <div class="col-md-3">
+      <div class="card shadow-sm border-0 rounded-4 p-4 text-center card-hover gradient-bg-primary">
+        <h3 class="fw-bold text-white">{{ total_jobs }}</h3>
+        <p class="text-white-50 mb-0">Jobs Posted</p>
+        <i class="bi bi-briefcase fs-2 text-white mt-2"></i>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card shadow-sm border-0 rounded-4 p-4 text-center card-hover gradient-bg-success">
+        <h3 class="fw-bold text-white">{{ total_applicants }}</h3>
+        <p class="text-white-50 mb-0">Applicants</p>
+        <i class="bi bi-people fs-2 text-white mt-2"></i>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card shadow-sm border-0 rounded-4 p-4 text-center card-hover gradient-bg-warning">
+        <h3 class="fw-bold text-white">{{ active_jobs }}</h3>
+        <p class="text-white-50 mb-0">Active Jobs</p>
+        <i class="bi bi-card-checklist fs-2 text-white mt-2"></i>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card shadow-sm border-0 rounded-4 p-4 text-center card-hover gradient-bg-info">
+        <h3 class="fw-bold text-white">{{ interviews_scheduled }}</h3>
+        <p class="text-white-50 mb-0">Interviews</p>
+        <i class="bi bi-calendar-event fs-2 text-white mt-2"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard Actions -->
   <div class="row g-4">
     <!-- Profile -->
     <div class="col-md-6 col-lg-3">
-      <div class="card h-100 text-center p-4 shadow-sm border-0 rounded-4 card-hover">
-        <div class="icon-circle bg-primary bg-opacity-10 text-primary mb-3 mx-auto">
+      <div class="card h-100 text-center p-4 shadow-lg border-0 rounded-4 card-hover gradient-bg-primary">
+        <div class="icon-circle mb-3 mx-auto text-white">
           <i class="bi bi-person-circle fs-1"></i>
         </div>
-        <h5 class="fw-bold">My Profile</h5>
-        <p class="text-muted small">Update company information & contact details.</p>
-        <a href="{% url 'employer_profile' %}" class="btn btn-primary btn-sm rounded-pill mt-2">Edit Profile</a>
+        <h5 class="fw-bold text-white">My Profile</h5>
+        <p class="text-white-50 small">Update company information & contact details.</p>
+        <a href="{% url 'employer_profile' %}" class="btn btn-light btn-sm rounded-pill mt-2">Edit Profile</a>
       </div>
     </div>
 
     <!-- Post Job -->
     <div class="col-md-6 col-lg-3">
-      <div class="card h-100 text-center p-4 shadow-sm border-0 rounded-4 card-hover">
-        <div class="icon-circle bg-success bg-opacity-10 text-success mb-3 mx-auto">
+      <div class="card h-100 text-center p-4 shadow-lg border-0 rounded-4 card-hover gradient-bg-success">
+        <div class="icon-circle mb-3 mx-auto text-white">
           <i class="bi bi-plus-circle fs-1"></i>
         </div>
-        <h5 class="fw-bold">Post a Job</h5>
-        <p class="text-muted small">Publish new job listings for candidates.</p>
-        <a href="{% url 'post_new_job' %}" class="btn btn-success btn-sm rounded-pill mt-2">Post Job</a>
+        <h5 class="fw-bold text-white">Post a Job</h5>
+        <p class="text-white-50 small">Publish new job listings for candidates.</p>
+        <a href="{% url 'post_new_job' %}" class="btn btn-light btn-sm rounded-pill mt-2">Post Job</a>
       </div>
     </div>
 
     <!-- Manage Jobs -->
     <div class="col-md-6 col-lg-3">
-      <div class="card h-100 text-center p-4 shadow-sm border-0 rounded-4 card-hover">
-        <div class="icon-circle bg-warning bg-opacity-10 text-warning mb-3 mx-auto">
+      <div class="card h-100 text-center p-4 shadow-lg border-0 rounded-4 card-hover gradient-bg-warning">
+        <div class="icon-circle mb-3 mx-auto text-white">
           <i class="bi bi-briefcase fs-1"></i>
         </div>
-        <h5 class="fw-bold">Manage Jobs</h5>
-        <p class="text-muted small">View, edit or delete your job postings.</p>
-        <a href="{% url 'manage_job' %}" class="btn btn-warning text-white btn-sm rounded-pill mt-2">Manage Jobs</a>
+        <h5 class="fw-bold text-white">Manage Jobs</h5>
+        <p class="text-white-50 small">View, edit or delete your job postings.</p>
+        <a href="{% url 'manage_job' %}" class="btn btn-light btn-sm rounded-pill mt-2">Manage Jobs</a>
       </div>
     </div>
 
     <!-- View Applicants -->
     <div class="col-md-6 col-lg-3">
-      <div class="card h-100 text-center p-4 shadow-sm border-0 rounded-4 card-hover">
-        <div class="icon-circle bg-info bg-opacity-10 text-info mb-3 mx-auto">
+      <div class="card h-100 text-center p-4 shadow-lg border-0 rounded-4 card-hover gradient-bg-info">
+        <div class="icon-circle mb-3 mx-auto text-white">
           <i class="bi bi-people fs-1"></i>
         </div>
-        <h5 class="fw-bold">View Applicants</h5>
-        <p class="text-muted small">Check candidates who applied to your jobs.</p>
-        <a href="{% url 'view_applicants' %}" class="btn btn-info text-white btn-sm rounded-pill mt-2">View Applicants</a>
+        <h5 class="fw-bold text-white">View Applicants</h5>
+        <p class="text-white-50 small">Check candidates who applied to your jobs.</p>
+        <a href="{% url 'view_applicants' %}" class="btn btn-light btn-sm rounded-pill mt-2">View Applicants</a>
       </div>
     </div>
   </div>
@@ -63,11 +96,12 @@
 <!-- Custom CSS -->
 <style>
   .card-hover {
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.4s, box-shadow 0.4s;
+    cursor: pointer;
   }
   .card-hover:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
   }
   .icon-circle {
     width: 80px;
@@ -76,7 +110,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 2rem;
   }
+  /* Gradient backgrounds */
+  .gradient-bg-primary { background: linear-gradient(135deg, #0062E6, #33AEFF); }
+  .gradient-bg-success { background: linear-gradient(135deg, #28a745, #81c784); }
+  .gradient-bg-warning { background: linear-gradient(135deg, #ffc107, #ffca28); }
+  .gradient-bg-info { background: linear-gradient(135deg, #17a2b8, #63d1de); }
+  /* Text color for white on gradients */
+  .text-white-50 { color: rgba(255,255,255,0.8); }
 </style>
 
 {% endblock %}

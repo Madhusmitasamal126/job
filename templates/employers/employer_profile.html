@@ -1,67 +1,66 @@
 {% extends "base.html" %}
-{% block title %}Employer Profile | Job Portal{% endblock %}
+{% load static %}
 {% block content %}
-
 <div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-md-10">
-      <div class="card shadow-lg border-0 rounded-4">
-        <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
-          <h3 class="mb-0"><i class="bi bi-building"></i> Employer Profile</h3>
+  <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+
+    <!-- Profile Header -->
+    <div class="card-header text-center py-5" style="background: linear-gradient(135deg, #0062E6, #33AEFF);">
+      <img src="{% if profile.avatar %}{{ profile.avatar.url }}{% else %}{% static 'images/default_avatar.jpg' %}{% endif %}" 
+           class="rounded-circle border border-3 border-white shadow-lg" 
+           style="width:140px;height:140px;object-fit:cover;">
+      <h3 class="mt-3 text-white">{{ profile.user.first_name }} {{ profile.user.last_name }}</h3>
+      <span class="badge {% if user_type == 'employer' %}bg-warning text-dark{% else %}bg-success{% endif %}">
+        {{ user_type|title }} Profile
+      </span>
+    </div>
+
+    <!-- Profile Body -->
+    <div class="card-body p-5">
+      <div class="row g-4">
+        {% if user_type == 'candidate' %}
+        <!-- Candidate Info -->
+        <div class="col-md-6">
+          <p><strong>Email:</strong> {{ profile.user.email }}</p>
+          <p><strong>Phone:</strong> {{ profile.phone|default:"N/A" }}</p>
+          <p><strong>Address:</strong> {{ profile.address|default:"N/A" }}</p>
+          <p><strong>DOB:</strong> {{ profile.dob|default:"N/A" }}</p>
+          <p><strong>Education:</strong> {{ profile.education|default:"N/A" }}</p>
+          <p><strong>Experience:</strong> {{ profile.experience|default:"N/A" }}</p>
         </div>
-        <div class="card-body p-4">
-          <form method="POST" class="needs-validation" novalidate>
-            {% csrf_token %}
-            
-            <div class="row">
-              <!-- Company Name -->
-              <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold"><i class="bi bi-building"></i> Company Name</label>
-                <input type="text" name="company_name" class="form-control" 
-                       value="{{ profile.company_name }}" placeholder="Enter company name" required>
-              </div>
-
-              <!-- Industry -->
-              <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold"><i class="bi bi-briefcase"></i> Industry</label>
-                <input type="text" name="industry" class="form-control" 
-                       value="{{ profile.industry }}" placeholder="e.g. IT, Healthcare">
-              </div>
-            </div>
-
-            <div class="row">
-              <!-- Location -->
-              <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold"><i class="bi bi-geo-alt"></i> Location</label>
-                <input type="text" name="location" class="form-control" 
-                       value="{{ profile.location }}" placeholder="City, Country">
-              </div>
-
-              <!-- Website -->
-              <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold"><i class="bi bi-globe"></i> Website</label>
-                <input type="url" name="website" class="form-control" 
-                       value="{{ profile.website }}" placeholder="https://example.com">
-              </div>
-            </div>
-
-            <!-- About Company -->
-            <div class="mb-3">
-              <label class="form-label fw-bold"><i class="bi bi-info-circle"></i> About Company</label>
-              <textarea name="about" rows="5" class="form-control" placeholder="Write about your company...">{{ profile.about }}</textarea>
-            </div>
-
-            <!-- Save Button -->
-            <div class="d-grid mt-4">
-              <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow">
-                <i class="bi bi-save"></i> Save Changes
-              </button>
-            </div>
-          </form>
+        <div class="col-md-6">
+          <p><strong>Skills:</strong></p>
+          {% for skill in skills_list %}
+            <span class="badge bg-info me-1">{{ skill }}</span>
+          {% empty %}
+            <span>N/A</span>
+          {% endfor %}
+          {% if profile.resume %}
+          <div class="mt-3">
+            <a href="{{ profile.resume.url }}" class="btn btn-outline-primary" target="_blank">Download Resume</a>
+          </div>
+          {% endif %}
         </div>
+        {% else %}
+        <!-- Employer Info -->
+        <div class="col-md-6">
+          <p><strong>Company:</strong> {{ profile.company_name|default:"N/A" }}</p>
+          <p><strong>Website:</strong> <a href="{{ profile.website }}" target="_blank">{{ profile.website|default:"N/A" }}</a></p>
+          <p><strong>Industry:</strong> {{ profile.industry|default:"N/A" }}</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Phone:</strong> {{ profile.phone|default:"N/A" }}</p>
+          <p><strong>Address:</strong> {{ profile.address|default:"N/A" }}</p>
+          <p><strong>Description:</strong> {{ profile.description|default:"N/A" }}</p>
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Actions -->
+      <div class="mt-4 text-center">
+        <a href="{% url 'profile_edit' %}" class="btn btn-primary px-4">Edit Profile</a>
       </div>
     </div>
   </div>
 </div>
-
 {% endblock %}
